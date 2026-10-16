@@ -1,0 +1,57 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "title": "LogEvent",
+  "type": "object",
+  "additionalProperties": false,
+  "required": [
+    "ts",
+    "level",
+    "service",
+    "event",
+    "attrs"
+  ],
+  "properties": {
+    "ts": {
+      "type": "string",
+      "pattern": "^\\d{4}-\\d{2}-\\d{2}T\\d{2}:\\d{2}:\\d{2}\\.\\d{3}Z$"
+    },
+    "level": {
+      "enum": [
+        "debug",
+        "info",
+        "warn",
+        "error"
+      ]
+    },
+    "service": {
+      "enum": [
+        "node",
+        "worker"
+      ]
+    },
+    "event": {
+      "$ref": "#/$defs/LogEventName"
+    },
+    "request_id": {
+      "type": "string"
+    },
+    "video_id": {
+      "type": "string",
+      "pattern": "^[A-Za-z0-9_-]{11}$"
+    },
+    "attrs": {
+      "type": "object"
+    }
+  },
+  "$defs": {
+    "LogEventName": {
+      "title": "LogEventName",
+      "type": "string",
+      "enum": [
+        "service.started",
+        "fetch.transcript",
+        "sponsorblock.call"
+      ]
+    }
+  }
+}
