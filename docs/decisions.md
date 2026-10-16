@@ -12,3 +12,6 @@
 - 2026-10-16: a cue is "kept" (5.4 step 5) when at least one of its lines survives steps 3 and 4; the gap is compared after rounding to milliseconds so that 2.0 s is not lost to float error.
 - 2026-10-16: any `<...>` is treated as an inline tag in step 3, and bracketed annotations do not span lines.
 - 2026-10-16: `sponsorblock.py` uses the standard library `urllib` (no new dependency); `fetch_segments(base_url, video_id, request_id)` returns `SponsorBlockResult(segments, state)` and a 200 with an unparsable body counts as `error` (logged with status 200); the midpoint rule is `cleaning.is_sponsored`, and a non-positive duration gives a ratio of 0.
+- 2026-10-16: `Extractor.extract(video_id)` returns `Extraction(duration, tracks)` or `"unavailable"`/`"blocked"`; `extractor.py` holds the fake extractor and `choose_track`, `ytdlp.py` holds the yt-dlp extractor, `parse_delay` and `make_extractor(env, langs)`.
+- 2026-10-16: the yt-dlp extractor only downloads the tracks whose language is in the requested languages (auto captions list hundreds), reads manual and auto tracks from `subtitles` and `automatic_captions` (`vtt` entries), and adds `quiet=True` to the options of 5.2.
+- 2026-10-16: yt-dlp errors are mapped by message ("not a bot" is `blocked`; private, age, removed, unavailable and similar are `unavailable`); any other error propagates.
