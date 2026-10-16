@@ -18,14 +18,19 @@ def _clean_line(line: str) -> str:
     return _SPACES.sub(" ", _ANNOTATION.sub("", line)).strip()
 
 
+def is_sponsored(cue: Cue, segments: Sequence[tuple[float, float]]) -> bool:
+    """Whether the midpoint of the cue lies in a segment (start inclusive, end exclusive)."""
+    midpoint = (cue.start + cue.end) / 2
+    return any(start <= midpoint < end for start, end in segments)
+
+
 def clean_cues(cues: Sequence[Cue], segments: Sequence[tuple[float, float]]) -> list[str]:
     """Return the paragraphs of the cleaned text; `segments` are SponsorBlock (start, end) pairs."""
     paragraphs: list[list[str]] = []
     previous_line: str | None = None
     previous_end = 0.0
     for cue in cues:
-        midpoint = (cue.start + cue.end) / 2
-        if any(start <= midpoint < end for start, end in segments):
+        if is_sponsored(cue, segments):
             continue
         kept: list[str] = []
         for line in map(_clean_line, cue.lines):

@@ -11,3 +11,4 @@
 - 2026-10-16: `vtt.py` holds `parse_vtt` and `Cue`, `cleaning.py` holds `clean_cues(cues, segments)` returning the paragraphs as a list of strings; segments are `(start, end)` pairs in seconds.
 - 2026-10-16: a cue is "kept" (5.4 step 5) when at least one of its lines survives steps 3 and 4; the gap is compared after rounding to milliseconds so that 2.0 s is not lost to float error.
 - 2026-10-16: any `<...>` is treated as an inline tag in step 3, and bracketed annotations do not span lines.
+- 2026-10-16: `sponsorblock.py` uses the standard library `urllib` (no new dependency); `fetch_segments(base_url, video_id, request_id)` returns `SponsorBlockResult(segments, state)` and a 200 with an unparsable body counts as `error` (logged with status 200); the midpoint rule is `cleaning.is_sponsored`, and a non-positive duration gives a ratio of 0.
