@@ -15,3 +15,6 @@
 - 2026-10-16: `Extractor.extract(video_id)` returns `Extraction(duration, tracks)` or `"unavailable"`/`"blocked"`; `extractor.py` holds the fake extractor and `choose_track`, `ytdlp.py` holds the yt-dlp extractor, `parse_delay` and `make_extractor(env, langs)`.
 - 2026-10-16: the yt-dlp extractor only downloads the tracks whose language is in the requested languages (auto captions list hundreds), reads manual and auto tracks from `subtitles` and `automatic_captions` (`vtt` entries), and adds `quiet=True` to the options of 5.2.
 - 2026-10-16: yt-dlp errors are mapped by message ("not a bot" is `blocked`; private, age, removed, unavailable and similar are `unavailable`); any other error propagates.
+- 2026-10-16: the command is `cli.py` (entry point `yt-digest-node` and `python -m yt_digest_node`); an invalid video id, a non-positive `MAX_WORDS`/`PAGE_WORDS` or a missing `FAKE_YTDLP_DIR` exit 2 through argparse before any log line.
+- 2026-10-16: SponsorBlock is only called once a track is chosen; a text that is empty after cleaning gives `no_transcript`; `fetch.transcript` reports `sponsorblock` = `none` when SponsorBlock was not called.
+- 2026-10-16: the `[…]` marker weighs no word in pages; a paragraph cut for `PAGE_WORDS` fills whole pages and its remainder can share a page with the next paragraphs.
