@@ -1,0 +1,28 @@
+WEBVTT
+Kind: captions
+Language: fr
+
+NOTE
+Written by hand.
+
+STYLE
+::cue { color: lime }
+
+REGION
+id:r1
+width:40%
+
+intro
+00:00:01.000 --> 00:00:03.000 align:start position:0%
+Bonjour à tous,
+
+2
+00:00:03.000 --> 00:00:05.000
+bienvenue dans cette vidéo.
+
+00:00:07.000 --> 00:00:09.000
+Premier sujet.
+Deuxième ligne.
+
+00:01:10.000 --> 00:01:12.500
+Une heure plus tard.
