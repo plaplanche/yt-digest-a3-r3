@@ -8,3 +8,6 @@
 - 2026-10-16: schemas encode types and ranges only; "null unless `ok`" style rules of 4.1 are the pipeline's job, and `attrs` of a log event is a free object whose per-event keys (4.2) are not validated.
 - 2026-10-16: the log catalogue lives in `$defs/LogEventName` of the log schema; the TypeScript runtime check uses a generated `LOG_EVENTS` array appended to `log-event.ts`; the Service column of the catalogue is not enforced, each logger stamps its own `service`.
 - 2026-10-16: `emit` and `log` take `request_id`, `video_id` and `attrs` as fields; `ts` is set by the logger and `attrs` defaults to `{}`.
+- 2026-10-16: `vtt.py` holds `parse_vtt` and `Cue`, `cleaning.py` holds `clean_cues(cues, segments)` returning the paragraphs as a list of strings; segments are `(start, end)` pairs in seconds.
+- 2026-10-16: a cue is "kept" (5.4 step 5) when at least one of its lines survives steps 3 and 4; the gap is compared after rounding to milliseconds so that 2.0 s is not lost to float error.
+- 2026-10-16: any `<...>` is treated as an inline tag in step 3, and bracketed annotations do not span lines.
